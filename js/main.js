@@ -375,7 +375,7 @@ async function boot() {
   const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
   try {
     const { initHero } = await import('./hero.js');
-    hero = initHero($('.js-hero-canvas'), 'assets/akshay-cutout.webp', { gsap });
+    hero = initHero($('.js-hero-canvas'), 'assets/sharik-cutout.webp', { gsap });
     document.documentElement.classList.add('has-webgl');
   } catch (err) {
     console.warn('WebGL hero unavailable, using image fallback.', err);

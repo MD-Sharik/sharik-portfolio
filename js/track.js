@@ -118,7 +118,7 @@ function tyreSidewall() {
     x.strokeStyle = '#d2ff00'; x.lineWidth = 10;
     x.beginPath(); x.arc(c, c, c * 0.83, 0, Math.PI * 2); x.stroke();
     x.fillStyle = '#e9e9e2'; x.font = '700 30px "JetBrains Mono", monospace'; x.textAlign = 'center'; x.textBaseline = 'middle';
-    const label = 'AK RACING  ·  SOFT  ·  ';
+    const label = 'MS RACING  ·  SOFT  ·  ';
     const str = label + label;
     for (let i = 0; i < str.length; i++) {
       x.save(); x.translate(c, c); x.rotate((i / str.length) * Math.PI * 2); x.translate(0, -c * 0.92); x.fillText(str[i], 0, 0); x.restore();
@@ -266,7 +266,7 @@ function buildCar() {
     mirror.position.set(0.46 * sd, 0.73, 0.6);
     // side decal
     const d = add(new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.15), new THREE.MeshStandardMaterial({
-      map: decal('AKSHAY KUMAR', '#121410', '900 92px "Big Shoulders Display", Impact, sans-serif'), transparent: true, roughness: 0.4, depthWrite: false,
+      map: decal('MD SHARIK', '#121410', '900 92px "Big Shoulders Display", Impact, sans-serif'), transparent: true, roughness: 0.4, depthWrite: false,
     })));
     d.position.set(0.305 * sd, 0.66, -0.95);
     d.rotation.y = (sd * Math.PI) / 2;
@@ -549,7 +549,7 @@ export function initTrack(container, state) {
   const kerbMat = new THREE.MeshStandardMaterial({ map: kerbMap, color: 0xb8b8b0, roughness: 0.6, envMapIntensity: 0.12, side: THREE.DoubleSide });
   const runoff = asphalt(false);
   const runoffMat = new THREE.MeshStandardMaterial({ ...runoff, color: 0x6d7266, roughness: 1, envMapIntensity: 0.15, side: THREE.DoubleSide });
-  const adItems = [['AKSHAY KUMAR', '#d2ff00'], ['SOFTWARE ENGINEER', '#f2f1e9'], ['ENT-GPT', '#d2ff00'], ['RAG · SLMs', '#f2f1e9']];
+  const adItems = [['MD SHARIK', '#d2ff00'], ['FULL-STACK AI', '#f2f1e9'], ['ESII CAPTIVEAI', '#d2ff00'], ['RAG · AGENTS', '#f2f1e9']];
   const adFont = '900 84px "Big Shoulders Display", Impact, sans-serif', adGap = 90;
   const adMeasure = document.createElement('canvas').getContext('2d');
   adMeasure.font = adFont;

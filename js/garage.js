@@ -2,12 +2,12 @@
 import * as THREE from 'three';
 
 const TECH = [
-  'React 19', 'Tailwind', 'Node.js', 'Express', 'Python', 'LangChain', 'Llama-2', 'RAG',
-  'Vector Search', 'SLMs', 'DistilBERT', 'Node-NLP', 'MediaPipe', 'Streamlit', 'MySQL', 'MongoDB',
-  'Docker', 'Linux', 'JWT', 'TOTP', 'LDAP', 'Azure AD', 'AWS IAM', 'GCP', 'HTML', 'CSS',
-  'Prompt Eng.', 'Active Directory',
+  'TypeScript', 'React', 'Next.js', 'React Native', 'Tailwind', 'Node.js', 'Express', 'FastAPI',
+  'Python', 'RAG', 'LiteLLM', 'OpenAI API', 'Agents', 'FastMCP', 'Ollama', 'Socket.io', 'Redis',
+  'BullMQ', 'MongoDB', 'PostgreSQL', 'MySQL', 'MinIO', 'Docker', 'Nginx', 'Linux', 'Azure',
+  'AWS', 'Entra ID', 'Active Directory', 'LDAP',
 ];
-const HOT = new Set(['React 19', 'Node.js', 'Python', 'RAG', 'LangChain', 'SLMs']);
+const HOT = new Set(['TypeScript', 'React', 'Node.js', 'Python', 'RAG', 'Agents']);
 
 function makeLabel(text, hot) {
   const c = document.createElement('canvas');

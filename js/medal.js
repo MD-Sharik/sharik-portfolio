@@ -38,7 +38,7 @@ function faceTexture() {
   engrave(() => { x.lineWidth = 4; x.beginPath(); x.arc(cx, cx, cx - 170, 0, Math.PI * 2); x.stroke(); });
 
   // circular text
-  const ring = '  DATA SCIENCE USING PYTHON  ✦  MICROSOFT PARTNER PROGRAM  ✦';
+  const ring = '  SCREEN DIMMER  ✦  GOOGLE PLAY  ✦  1000+ DOWNLOADS  ✦  RATED 4.6  ✦';
   x.font = '600 46px "JetBrains Mono", monospace';
   x.textAlign = 'center'; x.textBaseline = 'middle';
   const rr = cx - 105;
@@ -67,9 +67,9 @@ function faceTexture() {
 
   engrave(() => {
     x.font = '900 230px "Big Shoulders Display", Impact, sans-serif';
-    x.fillText('GOLD', cx, cx + 10);
+    x.fillText('4.6', cx, cx + 10);
     x.font = '600 52px "JetBrains Mono", monospace';
-    x.fillText('AKSHAY KUMAR', cx, cx + 175);
+    x.fillText('MD SHARIK', cx, cx + 175);
   });
 
   const t = new THREE.CanvasTexture(c);

@@ -132,6 +132,14 @@
       window.visualViewport.addEventListener('scroll', fitViewport);
       window.addEventListener('resize', fitViewport);
     }
+    if (window.ResizeObserver) {
+      var viewportObserver = new ResizeObserver(fitViewport);
+      viewportObserver.observe(document.documentElement);
+      viewportObserver.observe(document.body);
+    }
+    var layoutObserver = new MutationObserver(function () { requestAnimationFrame(fitViewport); });
+    layoutObserver.observe(document.body, {childList: true, subtree: true});
+    window.addEventListener('load', fitViewport, {once: true});
     document.body.appendChild(host);
     ui = {banner: root.querySelector('#banner'), dialog: root.querySelector('dialog')};
     root.querySelector('#accept').onclick = function () { saveChoice(true); };

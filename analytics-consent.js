@@ -5,7 +5,7 @@
       (cfg.cookiePath && location.pathname.indexOf(cfg.cookiePath) !== 0)) return;
   if (window.__siteAnalyticsConsent || !/^G-[A-Z0-9]+$/.test(cfg.id) || cfg.id === 'G-PENDING') return;
   window.__siteAnalyticsConsent = true;
-  var id = cfg.id, key = 'site-ga-consent-v1:' + id;
+  var id = cfg.id, key = 'site-analytics-consent-v2:' + cfg.siteId;
   var prefix = 'site' + id.replace(/[^A-Z0-9]/g, ''), cookiePath = cfg.cookiePath || '/';
   var layer = 'siteAnalyticsLayer', enabled = false, loaded = false, lastPath = '', ui, analyticsFrame = null, frameReady = false;
   var maxAge = 180 * 24 * 60 * 60 * 1000;
@@ -18,15 +18,17 @@
     if (path === lastPath) return;
     if (cfg.cmp && (!analyticsFrame || !frameReady)) return;
     lastPath = path;
-    var page = {send_to: id, page_location: location.origin + path,
+    var page = {send_to: id, site_id: cfg.siteId, page_location: location.origin + path,
       page_referrer: cleanReferrer(), page_title: cfg.title};
     if (cfg.cmp) analyticsFrame.contentWindow.postMessage({kind: 'consented-pageview', page: page}, location.origin);
     else tag('event', 'page_view', page);
   }
-  function clearCookies() {
+  function clearCookies(targetId) {
+    targetId = targetId || id;
+    var targetPrefix = 'site' + targetId.replace(/[^A-Z0-9]/g, '');
     document.cookie.split(';').forEach(function (entry) {
       var name = entry.split('=')[0].trim();
-      if (name !== prefix + '_ga' && name !== prefix + '_ga_' + id.slice(2)) return;
+      if (name !== targetPrefix + '_ga' && name !== targetPrefix + '_ga_' + targetId.slice(2)) return;
       var parts = location.hostname.split('.');
       var paths = ['/'];
       var pathParts = location.pathname.split('/').filter(Boolean), current = '';
@@ -38,6 +40,10 @@
       });
     });
   }
+  (cfg.legacyIds || []).forEach(function (legacyId) {
+    window['ga-disable-' + legacyId] = true;
+    clearCookies(legacyId);
+  });
   function setEnabled(allow) {
     var wasEnabled = enabled;
     enabled = allow === true;
@@ -96,9 +102,16 @@
     document.body.appendChild(frame);
   }
   function readChoice() {
-    try { var value = JSON.parse(localStorage.getItem(key));
-      if (value && typeof value.allow === 'boolean' && Date.now() - value.at >= 0 && Date.now() - value.at < maxAge) return value.allow;
-    } catch (_) {}
+    var keys = [key].concat((cfg.legacyIds || []).map(function (legacyId) { return 'site-ga-consent-v1:' + legacyId; }));
+    for (var i = 0; i < keys.length; i++) {
+      try {
+        var value = JSON.parse(localStorage.getItem(keys[i]));
+        if (value && typeof value.allow === 'boolean' && Date.now() - value.at >= 0 && Date.now() - value.at < maxAge) {
+          if (i > 0) localStorage.setItem(key, JSON.stringify(value));
+          return value.allow;
+        }
+      } catch (_) {}
+    }
     return null;
   }
   function saveChoice(allow) {
@@ -183,4 +196,4 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once: true});
   else start();
-})({"id": "G-B8L4L3HPL8", "title": "Sharik", "cmp": false, "cookiePath": "/", "hosts": ["sharik.in"], "frameUrl": null});
+})({"id": "G-8S7SE9F0PY", "title": "Sharik", "cmp": false, "cookiePath": "/", "hosts": ["sharik.in"], "frameUrl": null, "siteId": "sharik", "legacyIds": ["G-B8L4L3HPL8"]});
